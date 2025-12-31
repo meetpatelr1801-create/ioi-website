@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participants | TechXᴰᴹ Innovation Club</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --primary-dark: #27ae60;
+            --header-footer-bg: #0f172a; 
+            --body-bg: #f1f5f9;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --glass-white: rgba(255, 255, 255, 0.95);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Navigation --- */
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 8%; height: 85px;
+            background-color: var(--header-footer-bg);
+            border-bottom: 2px solid var(--primary);
+            position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; }
+        .logo-img { height: 50px; filter: drop-shadow(0 0 5px var(--primary)); }
+        .logo-area h2 { font-size: 1.1rem; letter-spacing: 2px; font-weight: 700; text-transform: uppercase; }
+
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { text-decoration: none; color: #cbd5e1; font-size: 0.85rem; text-transform: uppercase; font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* --- Hero Section --- */
+        .hero-section { text-align: center; padding: 80px 5% 40px; }
+        .hero-title { font-size: clamp(2.2rem, 5vw, 3.5rem); color: var(--header-footer-bg); font-weight: 800; }
+        .underline { width: 70px; height: 5px; background: var(--primary); margin: 15px auto; border-radius: 10px; }
+
+        /* --- Domain Container --- */
+        .container { max-width: 1300px; margin: 0 auto; padding: 20px 20px 100px; flex-grow: 1; }
+        .domain-row { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
+
+        .domain-column h2 {
+            font-size: 1.8rem; color: var(--header-footer-bg); margin-bottom: 40px;
+            display: flex; align-items: center; gap: 15px;
+            border-left: 6px solid var(--primary); padding-left: 20px;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        /* --- Team Cards --- */
+        .team-card {
+            background: var(--glass-white);
+            border-radius: 20px; padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            margin-bottom: 35px; transition: 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.8);
+            position: relative; overflow: hidden;
+        }
+        .team-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--primary); }
+        .team-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-color: var(--primary); }
+
+        .team-name {
+            font-size: 1.25rem; color: var(--header-footer-bg); font-weight: 700;
+            margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .team-badge { font-size: 0.65rem; background: #e2e8f0; padding: 4px 10px; border-radius: 50px; color: var(--text-muted); }
+
+        .members-list { list-style: none; }
+        .member-item {
+            display: flex; align-items: center; gap: 12px; padding: 12px 0;
+            font-weight: 500; color: var(--text-dark);
+            border-bottom: 1px solid rgba(0,0,0,0.03); font-size: 0.95rem;
+        }
+        .member-item:last-child { border-bottom: none; }
+        .member-item i { color: var(--primary); font-size: 0.9rem; }
+
+        /* --- Footer --- */
+        .organizer-footer { background-color: var(--header-footer-bg); padding: 60px 8% 30px; text-align: center; }
+        .organized-by-text { color: var(--primary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 40px; font-weight: 700; }
+        .organizer-logos { display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; align-items: center; }
+        .org-logo { height: 80px; background: white; padding: 12px; border-radius: 10px; }
+
+        /* Mobile */
+        .menu-icon { display: none; color: white; font-size: 1.8rem; cursor: pointer; padding: 5px; }
+        @media (max-width: 992px) {
+            .domain-row { grid-template-columns: 1fr; }
+            .nav-links { position: fixed; top: 85px; left: -100%; flex-direction: column; background: var(--header-footer-bg); width: 100%; height: 100vh; padding: 40px; transition: 0.4s; }
+            .nav-links.active { left: 0; }
+            .menu-icon { display: block; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="Iot.html" class="logo-area">
+        <img src="logo1.png" alt="Logo" class="logo-img">
+        <h2>ELECTROSPHERE</h2>
+    </a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="Home.html">Home</a></li>
+        <li><a href="Projects.html">Projects</a></li>
+        <li><a href="Participants.html">Participants</a></li>
+        <li><a href="vision.html">Vision</a></li>
+        <li><a href="About.html">About</a></li>
+    </ul>
+    <div class="menu-icon" onclick="document.getElementById('navLinks').classList.toggle('active')">
+        <i class="fas fa-bars"></i>
+    </div>
+</nav>
+
+<header class="hero-section">
+    <h1 class="hero-title" data-aos="fade-down">Teams</h1>
+    <div class="underline"></div>
+</header>
+
+<main class="container">
+    <div class="domain-row">
+        
+        <div class="domain-column" data-aos="fade-right">
+            <h2><i class="fas fa-code"></i> Software Track</h2>
+            
+            <div class="team-card">
+                <div class="team-name">The Blueprint <span class="team-badge">Team 01</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-user-circle"></i> ZEEL KUNDARIYA</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> RANI PATEL</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> TAPAN VACCHANI</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> KAHAN GORI</li>
+                </ul>
+            </div>
+
+            <div class="team-card">
+                <div class="team-name">InnovateX <span class="team-badge">Team 02</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-user-circle"></i> CHIT HIRPARA</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> PARTH KARETIYA</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> VIDHI MANDALIYA</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> VINEET PRAJAPATI</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> RACHIT KAKKAD</li>
+                </ul>
+            </div>
+
+            <div class="team-card">
+                <div class="team-name">Syntax Squad <span class="team-badge">Team 03</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-user-circle"></i> DEV PATEL</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> MANN PATEL</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> NEEV PATEL</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> ANSH PATEL</li>
+                </ul>
+            </div>
+
+            <div class="team-card">
+                <div class="team-name">Logic4ce <span class="team-badge">Team 04</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-user-circle"></i> PRINCE NAYAKPARA</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> JAYDIP VALIYA</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> BHAVY TALAVIYA</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> JALAK PALAN</li>
+                </ul>
+            </div>
+
+            <div class="team-card">
+                <div class="team-name">Binary Brains <span class="team-badge">Team 05</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-user-circle"></i> PRIYANSH</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> TRIKAM</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> HARSHIL</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> ANSH</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> MANAN</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> MAHARSHI</li>
+                </ul>
+            </div>
+
+            <div class="team-card">
+                <div class="team-name">Banka Gang <span class="team-badge">Team 06</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-user-circle"></i> GAURAV</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> MAYANK</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> HARSH</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> PREET</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> VISHAL</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> VEDANT</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> PRINCE</li>
+                </ul>
+            </div>
+
+            <div class="team-card">
+                <div class="team-name">Codepulse <span class="team-badge">Team 07</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-user-circle"></i> DHVANIT KANABAR</li>
+                </ul>
+            </div>
+
+            <div class="team-card">
+                <div class="team-name">CortexCrew <span class="team-badge">Team 08</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-user-circle"></i> PAL PATHAK</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> PARV SUHAGIYA</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> HARSH KAVATHIYA</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> JIVAN PATEL</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> PRATHVIK MEHRA</li>
+                </ul>
+            </div>
+            <div class="team-card">
+                <div class="team-name">Team Spino <span class="team-badge">Team 09</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-user-circle"></i> Suthar Anandkumar</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> Shahu Raunak</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> Rajput Devisingh</li>
+                    <li class="member-item"><i class="fas fa-user-circle"></i> Bacchav Pritesh</li>
+                </ul>
+            </div>
+             
+        </div>
+
+        <div class="domain-column" data-aos="fade-left">
+            <h2><i class="fas fa-microchip"></i> Hardware Track</h2>
+            
+            <div class="team-card">
+                <div class="team-name">IoT Nexus <span class="team-badge">Team 01</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> MEET PATEL</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> JAYESH VALANI</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> HET PATEL</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> ADITYA RAVAL</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> RAVINDRA RABARI</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> HARSH SUTHAR</li>
+                </ul>
+            </div>
+
+            <div class="team-card">
+                <div class="team-name">Sensor Squad 2.0 <span class="team-badge">Team 02</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> UMANG SINGH</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> KETAN YADAV</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> KAVYA PATEL</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> HARSHAD PRAJAPATI</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> PRIT CHAUDHARI</li>
+                </ul>
+            </div>
+
+            <div class="team-card">
+                <div class="team-name">IoT Titans <span class="team-badge">Team 03</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> PATEL VANSH</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> ROCHVANI KULDEEP</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> YADAV KRISHNA</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> PATEL HEET</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> PRAJAPATI NISARG</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> VADGAMA MANAN</li>
+                </ul>
+            </div>
+
+            <div class="team-card">
+                <div class="team-name">Ping With Things <span class="team-badge">Team 04</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> LOHAR HEENA</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> IQRA MANSURI</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> ASHWINI PATIL</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> UNNATI PATEL</li>
+                </ul>
+            </div>
+
+            <div class="team-card">
+                <div class="team-name">VoterX7 <span class="team-badge">Team 05</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> VAGHELA HITEN</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> PAREKH VISHVAM</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> BAROT DIVYAM</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> LIMBACHIYA MEET</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> MARVADI RUSHAB</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> AMIN PARTH</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> NAYEE JAIMIN</li>
+                </ul>
+            </div>
+
+            <div class="team-card">
+                <div class="team-name">Tech Innovation <span class="team-badge">Team 06</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> ROCHWANI AYUSHI</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> KARTIK AGRAWAL</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> HIMANSHI CHOUHAN</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> VISHAL SINGH</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> CHANDAN</li>
+                </ul>
+            </div>
+
+            <div class="team-card">
+                <div class="team-name">Flame Guard <span class="team-badge">Team 07</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> ZHA SACHIN KUMAR</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> KRISH SONI</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> MEET PATTANI</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> JIDHARTHSINGH RAHEVAR</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> JASH PATEL</li>
+                </ul>
+            </div>
+
+            <div class="team-card">
+                <div class="team-name">GJ Brothers <span class="team-badge">Team 08</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> RUDRA GIRI</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> VAGHELA HITESH</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> THAKKOR PRUTHVIRAJ</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> AARYAN</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> PATEL MAITRA </li>
+                    <li class="member-item"><i class="fas fa-tools"></i> VANJARA SAHIL</li>
+                </ul>
+            </div>
+
+            <div class="team-card">
+                <div class="team-name">Flood Rangers <span class="team-badge">Team 09</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> SWARIT JOSHI</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> NICK MAKWANA</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> PALAK SINGH</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> MAHI CHHABRA</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> HARSHIT GAUDANI</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> ASHUTOSH PANDEY</li>
+                </ul>
+            </div>
+
+            <div class="team-card">
+                <div class="team-name">Sensor Squad <span class="team-badge">Team 10</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> JAY YESHI</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> KRISH PANCHAL</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> PRASHANT SHRIVASTAV</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> KARAN LOKHANDE</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> JAYNIL GAMIT</li>
+                </ul>
+            </div>
+
+            <div class="team-card">
+                <div class="team-name">Unitex Squad <span class="team-badge">Team 11</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> DRASHTI GADHVI</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> ANCHAL RAJPUT</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> MANSETA NAISARGI</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> SONAL CHAUHAN</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> RIYA GAJJAR</li>
+                </ul>
+            </div>
+
+            <div class="team-card">
+                <div class="team-name">NeuroBotics <span class="team-badge">Team 12</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> PRATHAM GAJJAR</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> TANAY PATEL</li>
+                </ul>
+            </div>
+
+            <div class="team-card">
+                <div class="team-name">Team Electric <span class="team-badge">Team 13</span></div>
+                <ul class="members-list">
+                     <li class="member-item"><i class="fas fa-tools"></i> BHAVY SOMPURA</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> SAIYAD ISMAIL</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> PRAJAPATI OM</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> PANCHOLI PARTH</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> GHANCHI RUSHAN</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> KULDEEP VAGHELA</li>
+                </ul>
+            </div>
+            
+            <div class="team-card">
+                <div class="team-name">Team Fonix <span class="team-badge">Team 14</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> JOSHI DEEP</li>
+                </ul>
+            </div>
+            
+            <div class="team-card">
+                <div class="team-name">CoDevs <span class="team-badge">Team 15</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> JASH KUMBHANI</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> YASH RATHOD</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> VRAJESH PATEL</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> RISHI</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> Devarsh </li>
+                </ul>
+            </div>
+            <div class="team-card">
+                <div class="team-name">The Innovators <span class="team-badge">Team 16</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> Prakash Thakor</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> Niv patel</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> Poorvang Prajapati</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> Nandni soni</li>
+                </ul>
+            </div>
+            <div class="team-card">
+                <div class="team-name">The White huntetrs <span class="team-badge">Team 17</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> Yash Joshi</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> Aryan</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> Shubham dubey</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> Ayush Rajput</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> Satvik </li>
+                </ul>
+            </div>
+             <div class="team-card">
+                <div class="team-name">Echo Tech innovators<span class="team-badge">Team 18</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> Nayi Vedant</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> Thakor abhishek</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> Nayi maulik</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> Jay Joshi</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> Neel dave </li>
+                </ul>
+            </div>
+            <div class="team-card">
+                <div class="team-name">Team Wins<span class="team-badge">Team 19</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> Ankush Rajput</li>
+                </ul>
+            </div>
+            <div class="team-card">
+                <div class="team-name">Femme Terminator<span class="team-badge">Team 20</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> Kalgi</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> Shrushti</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> Vishva</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> Madhu</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> Ayushi Biswal</li>
+                </ul>
+            </div>
+             <div class="team-card">
+                <div class="team-name">Cyber Pair<span class="team-badge">Team 21</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> Darshana Kadiya</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> Shrushti Purohit</li>
+                </ul>
+            </div>
+             <div class="team-card">
+                <div class="team-name">Future Force<span class="team-badge">Team 22</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> Diya Patel</li>
+                    <li class="member-item"><i class="fas fa-tools"></i>Riya Mistry</li>
+                     <li class="member-item"><i class="fas fa-tools"></i> Arya Patel</li>
+                    <li class="member-item"><i class="fas fa-tools"></i>Jiya Patel</li>
+                     <li class="member-item"><i class="fas fa-tools"></i>Yashvi Patel</li>
+                </ul>
+            </div>
+            <div class="team-card">
+                <div class="team-name">Iceberg<span class="team-badge">Team 23</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> Sainadh</li>
+            </div>
+            <div class="team-card">
+                <div class="team-name">Team Leaders<span class="team-badge">Team 24</span></div>
+                <ul class="members-list">
+                    <li class="member-item"><i class="fas fa-tools"></i> Avinash</li>
+                    <li class="member-item"><i class="fas fa-tools"></i> Ankush</li>
+            </div>
+        </div>
+    </div>
+
+    <div style="margin-top: 80px; text-align: center;" data-aos="fade-up">
+        <h2 style="color: var(--header-footer-bg); margin-bottom: 20px;">Collaborative Engineering</h2>
+        <p style="color: var(--text-muted); max-width: 800px; margin: 0 auto;">At TechXᴰᴹ, all 23 teams collaborate to bridge the gap between concept and creation.</p>
+    </div>
+</main>
+
+<footer class="organizer-footer">
+    <p class="organized-by-text">Organized By</p>
+    <div class="organizer-logos">
+        <img src="swaminarayan-university-logo.jpg" alt="University" class="org-logo">
+        <img src="logo12.jpeg" alt="Partner" class="org-logo">
+    </div>
+    <div style="margin-top: 40px; font-size: 0.8rem; color: #64748b;">
+        &copy; 2025 ELECTROSPHERE. All Rights Reserved.
+    </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+    
+    // Toggle menu for mobile
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    const menuIcon = menuBtn.querySelector('i');
+
+    menuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        if (navLinks.classList.contains('active')) {
+            menuIcon.classList.remove('fa-bars');
+            menuIcon.classList.add('fa-times');
+        } else {
+            menuIcon.classList.remove('fa-times');
+            menuIcon.classList.add('fa-bars');
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Electrosphere</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --primary-dark: #27ae60;
+            --header-footer-bg: #0f172a; /* Same Deep Navy as Vision page */
+            --body-bg: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: var(--body-bg);
+            color: var(--text-dark);
+            line-height: 1.7;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 8%;
+            height: 85px;
+            background-color: var(--header-footer-bg);
+            border-bottom: 2px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 2000;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .logo-img { height: 50px; filter: drop-shadow(0 0 5px var(--primary)); }
+
+        .logo-area h2 { font-size: 1.2rem; letter-spacing: 3px; font-weight: 700; }
+
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #cbd5e1;
+            font-weight: 500;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--primary); }
+
+        /* --- HERO SECTION --- */
+        .about-hero {
+            padding: 80px 5% 40px;
+            text-align: center;
+        }
+
+        .about-hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: var(--header-footer-bg);
+        }
+
+        .underline {
+            width: 70px;
+            height: 5px;
+            background: var(--primary);
+            margin: 10px auto;
+            border-radius: 10px;
+        }
+
+        /* --- CONTENT SECTION --- */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px 100px;
+            flex-grow: 1;
+        }
+
+        .intro-text {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+        }
+
+        /* --- PROJECT CARDS --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .about-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: 0.3s ease;
+            border-bottom: 4px solid transparent;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .about-card i {
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+        }
+
+        .about-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            color: var(--header-footer-bg);
+        }
+
+        .about-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* --- FOOTER --- */
+        .organizer-footer {
+            background-color: var(--header-footer-bg);
+            color: #fff;
+            padding: 60px 8% 30px;
+            text-align: center;
+        }
+
+        .organized-by-text {
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.8rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .organizer-logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .org-logo {
+            height: 60px;
+            background: white;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        /* --- MOBILE --- */
+        .menu-icon { display: none; color: white; font-size: 1.5rem; cursor: pointer; }
+
+        @media (max-width: 992px) {
+            .menu-icon { display: block; }
+            .nav-links {
+                position: fixed;
+                top: 85px;
+                left: -100%;
+                flex-direction: column;
+                background: var(--header-footer-bg);
+                width: 100%;
+                height: 100vh;
+                padding-top: 50px;
+                transition: 0.4s;
+            }
+            .nav-links.active { left: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="Iot.html" class="logo-area">
+        <img src="logo1.png" alt="Logo" class="logo-img">
+        <h2>ELECTROSPHERE</h2>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+        <li><a href="Home.html">Home</a></li>
+        <li><a href="Projects.html">Projects</a></li>
+        <li><a href="Participants.html">Participants</a></li>
+        <li><a href="vision.html">Vision</a></li>
+        <li><a href="About.html">About</a></li>
+    </ul>
+
+    <div class="menu-icon" id="menuBtn">
+        <i class="fas fa-bars"></i>
+    </div>
+</nav>
+
+<header class="about-hero">
+    <h1 data-aos="fade-down">About Electrosphere</h1>
+    <div class="underline"></div>
+</header>
+
+<main class="container">
+    <p class="intro-text" data-aos="fade-up">
+        Electrosphere is a premier technical platform dedicated to bridging the gap between theoretical learning and practical innovation. We empower the next generation of engineers through diverse technical domains.
+    </p>
+
+    <div class="about-grid">
+        <div class="about-card" data-aos="zoom-in" data-aos-delay="100">
+            <i class="fas fa-network-wired"></i>
+            <h3>IoT Innovation</h3>
+            <p>Our Internet of Things (IoT) focus explores the seamless integration of physical devices with the digital world. We build smart systems that collect data and automate environments, solving real-world challenges through connectivity.</p>
+        </div>
+
+        <div class="about-card" data-aos="zoom-in" data-aos-delay="200">
+            <i class="fas fa-microchip"></i>
+            <h3>Hardware Engineering</h3>
+            <p>From circuit design to PCB prototyping, our hardware projects involve the core of electronics. We emphasize hands-on experience with embedded systems, sensors, and actuators to bring physical products to life.</p>
+        </div>
+
+        <div class="about-card" data-aos="zoom-in" data-aos-delay="300">
+            <i class="fas fa-code"></i>
+            <h3>Software Development</h3>
+            <p>Our software ecosystem focuses on the intelligence behind the machine. We develop robust applications, firmware, and AI/ML algorithms that provide the logic, control, and user interface for modern technological solutions.</p>
+        </div>
+    </div>
+</main>
+
+<footer class="organizer-footer">
+    <p class="organized-by-text">Organized By</p>
+    <div class="organizer-logos">
+        <img src="swaminarayan-university-logo.jpg" alt="University Logo" class="org-logo">
+        <img src="logo12.jpeg" alt="Partner Logo" class="org-logo">
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 ELECTROSPHERE. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        menuBtn.querySelector('i').classList.toggle('fa-bars');
+        menuBtn.querySelector('i').classList.toggle('fa-times');
+    });
+</script>
+
+</body>
+</html>

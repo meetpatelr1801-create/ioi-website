@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | TechXᴰᴹ Innovation Club</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --primary-dark: #27ae60;
+            --header-footer-bg: #0f172a; 
+            --body-bg: #f1f5f9;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --glass-white: rgba(255, 255, 255, 0.95);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Navigation --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 8%;
+            height: 85px;
+            background-color: var(--header-footer-bg);
+            border-bottom: 2px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .logo-area { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; }
+        .logo-img { height: 50px; filter: drop-shadow(0 0 5px var(--primary)); }
+        .logo-area h2 { font-size: 1.1rem; letter-spacing: 2px; font-weight: 700; text-transform: uppercase; }
+
+        .nav-links { display: flex; list-style: none; gap: 30px; }
+        .nav-links a { 
+            text-decoration: none; color: #cbd5e1; font-size: 0.85rem; 
+            text-transform: uppercase; font-weight: 500; transition: 0.3s; 
+        }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* --- Header --- */
+        .project-hero {
+            text-align: center;
+            padding: 100px 5% 50px;
+        }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            color: var(--header-footer-bg);
+            font-weight: 800;
+        }
+
+        .underline { width: 70px; height: 5px; background: var(--primary); margin: 15px auto; border-radius: 10px; }
+
+        /* --- Section Styling --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 20px 100px;
+            flex-grow: 1;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 60px 0 30px;
+        }
+
+        .category-header h2 {
+            font-size: 1.8rem;
+            color: var(--header-footer-bg);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .category-line {
+            flex-grow: 1;
+            height: 1px;
+            background: #cbd5e1;
+        }
+
+        /* --- Grid & Cards --- */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--glass-white);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: 0.4s ease;
+            border: 1px solid rgba(255,255,255,0.5);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-color: var(--primary);
+        }
+
+        .project-icon {
+            font-size: 2.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+        }
+
+        .project-card h3 {
+            font-size: 1.25rem;
+            color: var(--header-footer-bg);
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            min-height: 3rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .project-card p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: auto;
+        }
+
+        .tag {
+            background: #e2e8f0;
+            color: var(--text-dark);
+            font-size: 0.7rem;
+            padding: 4px 12px;
+            border-radius: 5px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        /* --- Footer --- */
+        .organizer-footer {
+            background-color: var(--header-footer-bg);
+            padding: 80px 8% 40px;
+            text-align: center;
+        }
+
+        .organized-by-text { color: var(--primary); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 40px; font-weight: 700; }
+        .organizer-logos { display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; align-items: center; }
+        .org-logo { height: 80px; background: white; padding: 12px; border-radius: 10px; transition: 0.3s; }
+        .org-logo:hover { transform: scale(1.05); }
+
+        .menu-icon { display: none; color: white; font-size: 1.8rem; cursor: pointer; }
+
+        @media (max-width: 992px) {
+            .nav-links { 
+                position: fixed; top: 85px; left: -100%; 
+                flex-direction: column; background: var(--header-footer-bg); 
+                width: 100%; height: 100vh; padding: 40px; transition: 0.4s; 
+            }
+            .nav-links.active { left: 0; }
+            .menu-icon { display: block; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="Home.html" class="logo-area">
+        <img src="logo1.png" alt="Logo" class="logo-img">
+        <h2>ELECTROSPHERE</h2>
+    </a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="Home.html">Home</a></li>
+        <li><a href="Projects.html">Projects</a></li>
+        <li><a href="Participants.html">Participants</a></li>
+        <li><a href="vision.html">Vision</a></li>
+        <li><a href="About.html">About</a></li>
+    </ul>
+    <div class="menu-icon" onclick="document.getElementById('navLinks').classList.toggle('active')">
+        <i class="fas fa-bars"></i>
+    </div>
+</nav>
+
+<header class="project-hero">
+    <h1 class="hero-title" data-aos="fade-down">Innovation Portfolio</h1>
+    <div class="underline"></div>
+</header>
+
+<main class="container">
+    
+    <div class="category-header" data-aos="fade-right">
+        <i class="fas fa-code" style="color: var(--primary); font-size: 1.5rem;"></i>
+        <h2>Software Based Projects</h2>
+        <div class="category-line"></div>
+    </div>
+
+    <div class="project-grid">
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-laptop-code"></i></div>
+            <h3>E-Learning Platform</h3>
+            <p>Adaptive Personalized Learning Platform using AI and Emotion Recognition. Features dynamic curriculum generation and real-time adaptation.</p>
+            <div class="tech-tags"><span class="tag">AI</span><span class="tag">React.js</span><span class="tag">OpenCV</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-user-shield"></i></div>
+            <h3>AI Security Intel</h3>
+            <p>AI-Powered Ethical Hacking platform that analyzes code, APIs, and database logic to identify risks before deployment.</p>
+            <div class="tech-tags"><span class="tag">Cyber Security</span><span class="tag">AI</span><span class="tag">Intel</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-comment-dots"></i></div>
+            <h3>Kalix AI</h3>
+            <p>A sophisticated AI chat bot designed to handle user queries efficiently and provide intelligent, context-aware responses.</p>
+            <div class="tech-tags"><span class="tag">NLP</span><span class="tag">AI</span><span class="tag">Chatbot</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-briefcase"></i></div>
+            <h3>BizPilot</h3>
+            <p>Smart digital assistant for business owners. Automates tasks, reminders, client follow-ups, and expenses.</p>
+            <div class="tech-tags"><span class="tag">Automation</span><span class="tag">Business</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-address-card"></i></div>
+            <h3>Quick Portfolio Maker</h3>
+            <p>A specialized software tool designed to create professional digital portfolios quickly and easily within a single minute.</p>
+            <div class="tech-tags"><span class="tag">Web Dev</span><span class="tag">Portfolio</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-network-wired"></i></div>
+            <h3>Aura: Forensic Lab</h3>
+            <p>A Zero-Trust Forensic Messaging Software built with a multi-stage network node simulator for secure communication.</p>
+            <div class="tech-tags"><span class="tag">Cybersec</span><span class="tag">Zero-Trust</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-cloud-sun"></i></div>
+            <h3>Weather Station App</h3>
+            <p>A dedicated software platform for real-time weather monitoring and historical climate data visualization.</p>
+            <div class="tech-tags"><span class="tag">API</span><span class="tag">Data</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-heartbeat"></i></div>
+            <h3>AutoSense AI</h3>
+            <p>Intelligent monitoring system using FastAPI to track system health and detect anomalies in real-time.</p>
+            <div class="tech-tags"><span class="tag">FastAPI</span><span class="tag">Monitoring</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-desktop"></i></div>
+            <h3>Desktop AI Assistant</h3>
+            <p>SPINO AI is a "Swiss Army knife" desktop app consolidating multiple AI functionalities into a single platform.</p>
+            <div class="tech-tags"><span class="tag">AI</span><span class="tag">Python</span><span class="tag">Desktop</span></div>
+        </div>
+    </div>
+
+    <div class="category-header" data-aos="fade-right" style="margin-top: 100px;">
+        <i class="fas fa-tools" style="color: var(--primary); font-size: 1.5rem;"></i>
+        <h2>Hardware Based Projects</h2>
+        <div class="category-line"></div>
+    </div>
+
+    <div class="project-grid">
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-robot"></i></div>
+            <h3>Human Following Robot</h3>
+            <p>Robotic hardware designed to autonomously follow a human using sensor fusion and motor control navigation.</p>
+            <div class="tech-tags"><span class="tag">Arduino</span><span class="tag">Sensors</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-wave-square"></i></div>
+            <h3>Heart Beat Sensor</h3>
+            <p>Measures heartbeats and uploads readings online via IoT for remote health monitoring and alerts.</p>
+            <div class="tech-tags"><span class="tag">IoT</span><span class="tag">Health</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-fire"></i></div>
+            <h3>Fire & Smoke Detector</h3>
+            <p>Detects fire and smoke signatures using advanced sensors and sends real-time emergency alerts via IoT.</p>
+            <div class="tech-tags"><span class="tag">IoT</span><span class="tag">Safety</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-user-astronaut"></i></div>
+            <h3>Human AI Robot</h3>
+            <p>Advanced robot controllable via smartphone commands from anywhere, allowing remote navigation.</p>
+            <div class="tech-tags"><span class="tag">AI</span><span class="tag">Mobile Control</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-microphone"></i></div>
+            <h3>Voice Controlled Robot</h3>
+            <p>Uses Arduino Uno and DC motors to respond to voice commands for movement and navigation.</p>
+            <div class="tech-tags"><span class="tag">Arduino</span><span class="tag">Voice</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-car-side"></i></div>
+            <h3>Obstacle Avoiding Car</h3>
+            <p>Autonomous vehicle platform that uses ultrasonic sensors to navigate without hitting objects.</p>
+            <div class="tech-tags"><span class="tag">Ultrasonic</span><span class="tag">Car</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-extinguisher"></i></div>
+            <h3>Fire Fighting Car</h3>
+            <p>Smart vehicle built on a "Sense-Think-Act" loop to detect heat sources and engage extinguishing mechanisms.</p>
+            <div class="tech-tags"><span class="tag">Robotics</span><span class="tag">Embedded</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-door-open"></i></div>
+            <h3>Smart Door Automation</h3>
+            <p>Arduino-based sensor system that automatically manages door entry/exit upon sensing motion.</p>
+            <div class="tech-tags"><span class="tag">Arduino</span><span class="tag">Home Auto</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-wifi"></i></div>
+            <h3>WiFi Weather Monitor</h3>
+            <p>Sends sensor data to cloud platforms via Wi-Fi for live monitoring on mobile dashboards.</p>
+            <div class="tech-tags"><span class="tag">ESP8266</span><span class="tag">IoT</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-mobile-alt"></i></div>
+            <h3>Mobile Operated Car</h3>
+            <p>Uses Bluetooth sensors for movement control via a dedicated mobile interface with stable 4-motor drive.</p>
+            <div class="tech-tags"><span class="tag">Bluetooth</span><span class="tag">Arduino</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-trash"></i></div>
+            <h3>Smart Dustbin</h3>
+            <p>Eco-friendly smart dustbin that opens and closes automatically when it senses a user nearby.</p>
+            <div class="tech-tags"><span class="tag">Servo</span><span class="tag">Ultrasonic</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-water"></i></div>
+            <h3>Early Flood Detection</h3>
+            <p>IoT monitoring system using water level, flow, and humidity sensors with mechanical backup.</p>
+            <div class="tech-tags"><span class="tag">Environment</span><span class="tag">IoT</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-flask"></i></div>
+            <h3>Water Turbidity Monitor</h3>
+            <p>Measures water quality and clarity using low-cost sensors to identify pollution levels in real-time.</p>
+            <div class="tech-tags"><span class="tag">Sensors</span><span class="tag">Water Quality</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-hand-paper"></i></div>
+            <h3>Gesture Recognition</h3>
+            <p>Controls LED outputs through hand gestures using Python, OpenCV, and Arduino Uno.</p>
+            <div class="tech-tags"><span class="tag">OpenCV</span><span class="tag">Gesture</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-desktop"></i></div>
+            <h3>Gesture Animation Control</h3>
+            <p>Integrates hardware and software to control PC-based animations using simple hand movements.</p>
+            <div class="tech-tags"><span class="tag">HCI</span><span class="tag">Automation</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-headset"></i></div>
+            <h3>Autobot X</h3>
+            <p>AI-integrated Voice Control Robot capable of advanced speech processing and command execution.</p>
+            <div class="tech-tags"><span class="tag">AI</span><span class="tag">Voice Robot</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-faucet"></i></div>
+            <h3>Auto Water Dispenser</h3>
+            <p>Touchless water delivery system using IR sensors and 5V relays for a hygienic solution.</p>
+            <div class="tech-tags"><span class="tag">IR Sensor</span><span class="tag">Automation</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-recycle"></i></div>
+            <h3>Smart Bin (Dry/Wet)</h3>
+            <p>Automatically separates dry and wet garbage to assist in environmental waste management.</p>
+            <div class="tech-tags"><span class="tag">Moisture Sensor</span><span class="tag">Servo</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-shield-virus"></i></div>
+            <h3>Theft Detector System</h3>
+            <p>Automated security system that triggers an alarm upon detecting unauthorized movement.</p>
+            <div class="tech-tags"><span class="tag">PIR Sensor</span><span class="tag">Security</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-ruler-horizontal"></i></div>
+            <h3>Distance Measurement</h3>
+            <p>Measures object distance without contact using ultrasonic echo time calculations displayed on LCD.</p>
+            <div class="tech-tags"><span class="tag">Arduino</span><span class="tag">Ultrasonic</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-signal-slash"></i></div>
+            <h3>BT & Wi-Fi Jammer</h3>
+            <p>Portable device to prevent local signal interference for students studying in noisy environments.</p>
+            <div class="tech-tags"><span class="tag">RF Security</span><span class="tag">Antenna</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-glasses"></i></div>
+            <h3>Blind Smart Glasses</h3>
+            <p>Assistive technology that helps visually impaired people navigate objects using sensor feedback.</p>
+            <div class="tech-tags"><span class="tag">Accessibility</span><span class="tag">IoT</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-house-chimney-user"></i></div>
+            <h3>Home Automation Hub</h3>
+            <p>Centralized control for lights, fans, and appliances using Arduino and integrated relay circuits.</p>
+            <div class="tech-tags"><span class="tag">Relay</span><span class="tag">Arduino</span></div>
+        </div>
+
+        <div class="project-card" data-aos="fade-up">
+            <div class="project-icon"><i class="fas fa-snowflake"></i></div>
+            <h3>Suitcase Refrigerator</h3>
+            <p>Compact smart cooler with remote mobile temperature settings and humidity monitoring.</p>
+            <div class="tech-tags"><span class="tag">IoT</span><span class="tag">Peltier</span></div>
+        </div>
+    </div>
+
+    <div style="margin-top: 100px; text-align: center;" data-aos="fade-up">
+        <h2 style="color: var(--header-footer-bg); margin-bottom: 20px;">The Interplay of Software & Hardware</h2>
+        <p style="color: var(--text-muted); max-width: 800px; margin: 0 auto 40px;">At TechXᴰᴹ, we bridge the physical and digital worlds. Every piece of hardware we build is powered by intelligent software.</p>
+    </div>
+
+</main>
+
+<footer class="organizer-footer">
+    <p class="organized-by-text">Organized By</p>
+    <div class="organizer-logos">
+        <img src="swaminarayan-university-logo.jpg" alt="University" class="org-logo">
+        <img src="logo12.jpeg" alt="Partner" class="org-logo">
+    </div>
+    <div style="margin-top: 40px; font-size: 0.8rem; color: #64748b;">
+        &copy; 2025 ELECTROSPHERE. All Rights Reserved.
+    </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+</script>
+
+</body>
+</html>
